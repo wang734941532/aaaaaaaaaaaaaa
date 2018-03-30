@@ -226,16 +226,44 @@
 															<th>操作</th>
 													</tr>
 												</thead>
+													
+                       		  <c:set var="so1" value="${info.categorylevel1 }" scope="session"></c:set>
+                              <c:set var="so2" value="${info.categorylevel2 }" scope="session"></c:set>
+                              <c:set var="so3" value="${info.categorylevel3 }" scope="session"></c:set>
+                              
+                              <c:set var="so4" value="${info.flatformid }"  scope="session"></c:set>
+                      			
+                            <c:set var="so5" value="${info.status }"  scope="session"></c:set>
+											
+											<!--               ------ -->
+								 <% 
+                              Map map = (HashMap)session.getAttribute("map");
+                              
+                              Map dicMap = (HashMap)session.getAttribute("dicMap");
+                              
+                              Object a = session.getAttribute("so1");
+                               Object b = session.getAttribute("so2");
+                               Object c = session.getAttribute("so3");
+                           	  Object d = (Object)session.getAttribute("so4");
+                           	 Object e = (Object)session.getAttribute("so5");
+                           		
+                               	Object s1 =  map.get(a);
+                            	Object s2 =  map.get(b);
+                            	Object s3 =  map.get(c);
+                            	
+                            	Object s4 =  (Object)dicMap.get(d);
+                            	Object s5 =  (Object)map.get(e);
+                              %>			
 											
 											<c:forEach items="${infoList }" var="info" varStatus="i">
 											
 													<tr>
 														<td>${info.softwarename }</td>
 														<td>${info.apkname }</td>
-														<td>${info.softwaresize }</td>
-														<td>${info.flatformid }</td>
-														<td>${info.categorylevel1 }-->${info.categorylevel2 }-->${info.categorylevel3 }</td>
-														<td>${info.status }</td>
+														<td>$   {info.softwaresize }</td>
+														<td>手机</td>
+														<td><%=s1 %>--><%=s2 %>--><%=s3 %></td>
+														<td><%=s4 %></td>
 														<td>${info.downloads }</td>
 														<td>
 															<!-- Split button -->

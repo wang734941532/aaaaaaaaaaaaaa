@@ -141,8 +141,10 @@ public class DevController {
 		int info_Id =Integer.parseInt(id);
 		Information info = null;
 		Version v = null;
+		List<Category> catList = null;
 		List<Dictionary> dicList = null;
 		Map dicMap = null;
+		Map map =null;
 		if(session.getAttribute("dicMap") == null){
 			dicList = dictionaryService.getDictionaryListByStatus();
 			dicMap =new HashMap();
@@ -154,6 +156,19 @@ public class DevController {
 			}
 		}else{
 			dicMap= (HashMap)session.getAttribute("dicMap");
+		}
+		
+		if(session.getAttribute("map") == null){
+			catList = categoryService.getCategoryList();
+			map = new HashMap(); 
+			for(Category c : catList) {
+				Object d = (Object)(c.getId());
+				map.put(d, c.getCategoryname());
+			}
+			
+		}else{
+			
+			map = (HashMap)session.getAttribute("map");
 		}
 	
 		try {
@@ -175,6 +190,7 @@ public class DevController {
 			session.setAttribute("version",v);
 			session.setAttribute("info", info);
 			session.setAttribute("dicMap", dicMap);
+			session.setAttribute("map", map);
 			
 		}catch(Exception e) {
 			e.printStackTrace();

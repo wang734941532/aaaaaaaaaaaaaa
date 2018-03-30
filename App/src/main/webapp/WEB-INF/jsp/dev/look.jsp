@@ -3,6 +3,7 @@
 <%@page import="java.util.HashMap"%>
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
+   <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -194,7 +195,7 @@ String basePath = request.getScheme() + "://"
                 <div class="x_panel"><!--??面板-->
                 	
                 	<div class="x_title"><!--题目1title-->
-              			<h2> 查看并审核APP信息  <i class="fa fa-user"></i> <span>系统管理员</span></h2>
+              			<h2> 查看APP信息  <i class="fa fa-user"></i> <span>系统管理员</span></h2>
               			<div class="clearfix"></div>
               		</div><!--题目1title end-->
               		<div class="x_title"><!--题目2title-->
@@ -252,28 +253,35 @@ String basePath = request.getScheme() + "://"
                               
                               <c:set var="so4" value="${info.flatformid }"  scope="session"></c:set>
                       			
+                            <c:set var="so5" value="${info.status }"  scope="session"></c:set>
+                             <c:set var="so6" value=" ${version.publishstatus }" scope="session"></c:set>
                            
                               <% 
                               Map map = (HashMap)session.getAttribute("map");
+                              
                               Map dicMap = (HashMap)session.getAttribute("dicMap");
                               
                               
                               
-                               Object a = session.getAttribute("so1");
+                              Object a = session.getAttribute("so1");
                                Object b = session.getAttribute("so2");
                                Object c = session.getAttribute("so3");
                            	  Object d = (Object)session.getAttribute("so4");
+                           	 Object e = (Object)session.getAttribute("so5");
+                           	 Object f = (Object)session.getAttribute("so6");
                            		
                                	Object s1 =  map.get(a);
                             	Object s2 =  map.get(b);
                             	Object s3 =  map.get(c);
                             	Object s4 =  (Object)map.get(d);
+                            	Object s5 =  (Object)dicMap.get(e);
+                            	Object s6 =  (Object)dicMap.get(f);
                               %>
                               
                       <div class="form-group">
                         <label for="platform" class="control-label col-md-3 col-sm-3 col-xs-12">所属平台<span class="required">*</span></label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input id="platform" class="form-control col-md-7 col-xs-12" value="手机" readonly  type="text" name="platform">
+                          <input id="platform" class="form-control col-md-7 col-xs-12" value="<%=s4 %>" readonly  type="text" name="platform">
                         </div>
                       </div>
                       <div class="form-group">
@@ -286,7 +294,7 @@ String basePath = request.getScheme() + "://"
                       <div class="form-group">
                         <label for="status" class="control-label col-md-3 col-sm-3 col-xs-12">APP状态<span class="required">*</span></label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input id="status" class="form-control col-md-7 col-xs-12"  value="${info.status } <%=dicMap %>" readonly type="text" name="status">
+                          <input id="status" class="form-control col-md-7 col-xs-12"  value="<%=s5%>" readonly type="text" name="status">
                         </div>
                       </div>
                       <div class="form-group">
@@ -308,10 +316,7 @@ String basePath = request.getScheme() + "://"
               		  <div class="form-group">
                      
 												<div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-				<button type="submit" class="btn btn-success ooo" >审核通过</button>
-				<input type="hidden" name="no1" value="${info.id }" class="passornot">
-				<button type="submit" class="btn btn-success qqq">审核不通过</button>
-				<button type="submit" class="btn btn-primary"><a href="${pageContext.request.contextPath }/manager/validate">返回</a></button>
+				<button type="submit" class="btn btn-success"><a href="${pageContext.request.contextPath }/dev/maintenance">返回</a></button>
 												</div>
 											</div>
               		
@@ -348,7 +353,7 @@ String basePath = request.getScheme() + "://"
                       <div class="form-group">
                         <label for="versionStatus" class="control-label col-md-3 col-sm-3 col-xs-12">发布状态<span class="required">*</span></label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input id="versionStatus" class="form-control col-md-7 col-xs-12" readonly value="${version.publishstatus } <%=dicMap %>"   type="text" name="versionStatus">
+                          <input id="versionStatus" class="form-control col-md-7 col-xs-12" readonly value="${version.publishstatus }<%=dicMap %>"   type="text" name="versionStatus">
                         </div>
                       </div>
                       <div class="form-group">
